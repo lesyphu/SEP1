@@ -10,6 +10,11 @@ namespace SEPApplication1.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["Email"] != null)
+            {
+                var result = new API().GetCourses(Session["ID"] as string);
+                    return View(result.Data);
+            }
             return View();
         }
 
