@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sepoopcsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Session_id" Type="int" Nullable="false" />
+          <Property Name="Member_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Info" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lecturer" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Course_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Info" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Course_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Attendanc__Membe__59063A47">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__Sessi__5812160E">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Session__Course___5535A963">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sepoopcsModelStoreContainer">
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Attendanc__Membe__59063A47" Association="Self.FK__Attendanc__Membe__59063A47">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__Sessi__5812160E" Association="Self.FK__Attendanc__Sessi__5812160E">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Session__Course___5535A963" Association="Self.FK__Session__Course___5535A963">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Course" Association="Self.FK_Student_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sepoopcsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Session_id" Type="Int32" Nullable="false" />
+          <Property Name="Member_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Attendanc__Membe__59063A47" FromRole="Attendance" ToRole="Member" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Attendanc__Sessi__5812160E" FromRole="Attendance" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lecturer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK__Session__Course___5535A963" FromRole="Course" ToRole="Session" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_Student_Course" FromRole="Course" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Course_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Membe__59063A47" FromRole="Member" ToRole="Attendance" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Student_Course" FromRole="Member" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Sessi__5812160E" FromRole="Session" ToRole="Attendance" />
+          <NavigationProperty Name="Course" Relationship="Self.FK__Session__Course___5535A963" FromRole="Session" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK__Attendanc__Membe__59063A47">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__Sessi__5812160E">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Session__Course___5535A963">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SEPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <AssociationSet Name="FK__Attendanc__Membe__59063A47" Association="Self.FK__Attendanc__Membe__59063A47">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__Sessi__5812160E" Association="Self.FK__Attendanc__Sessi__5812160E">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Session__Course___5535A963" Association="Self.FK__Session__Course___5535A963">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Course" Association="Self.FK_Student_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sepoopcsModelStoreContainer" CdmEntityContainer="SEPEntities">
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="sepoopcsModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Session_id" ColumnName="Session_id" />
+                <ScalarProperty Name="Member_id" ColumnName="Member_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="sepoopcsModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Lecturer" ColumnName="Lecturer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="sepoopcsModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="sepoopcsModel.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
