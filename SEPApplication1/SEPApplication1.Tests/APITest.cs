@@ -22,5 +22,6 @@ namespace SEPApplication1.Tests
             var result = api.GetCourses("ND");
             Assert.AreEqual(3, result.Data.Length);
         }
+        
     }
 }

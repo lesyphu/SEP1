@@ -162,8 +162,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -266,6 +269,21 @@
     <Content Include="Views\Courses\Details.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Session\Create.cshtml" />
+    <Content Include="Views\Session\Delete.cshtml" />
+    <Content Include="Views\Session\Details.cshtml" />
+    <Content Include="Views\Session\Edit.cshtml" />
+    <Content Include="Views\Session\Index.cshtml" />
+    <Content Include="Views\Attendance\Create.cshtml" />
+    <Content Include="Views\Attendance\Delete.cshtml" />
+    <Content Include="Views\Attendance\Details.cshtml" />
+    <Content Include="Views\Attendance\Edit.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
